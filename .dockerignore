@@ -1,0 +1,28 @@
+# Ignore Git files and directories
+.git
+.gitignore
+
+# Ignore node_modules (if you’re using Node.js)
+node_modules/
+
+# Ignore any temporary files and directories
+*.log
+*.tmp
+*.swp
+
+# Ignore environment variables and configuration files
+.env
+*.env
+
+# Ignore Dockerfile itself and any scripts related to local dev
+Dockerfile
+docker-compose.yml
+scripts/
+
+# Ignore build artifacts
+build/
+dist/
+
+# Ignore IDE/editor specific files (VS Code, JetBrains, etc.)
+.vscode/
+.idea/

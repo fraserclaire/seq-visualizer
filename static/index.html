@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcriptomics Visualizer</title>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.19.1"></script>  <!-- Add Plotly.js -->
+</head>
+<body>
+    <h1>Transcriptomics Visualizer</h1>
+
+    <!-- Generate Heatmap Section -->
+    <h2>Generate Heatmap</h2>
+    <input type="file" id="heatmapFileInput" accept=".csv" required>
+    <label for="heatmapWidth">Width:</label>
+    <input type="number" id="heatmapWidth" value="800" min="100" max="2000" required>
+    <label for="heatmapHeight">Height:</label>
+    <input type="number" id="heatmapHeight" value="600" min="100" max="2000" required>
+    <button onclick="generateHeatmap()">Generate Heatmap</button>
+    <div id="heatmap"></div>  <!-- Placeholder for heatmap -->
+
+    <!-- Generate Volcano Plot Section -->
+    <h2>Generate Volcano Plot</h2>
+    <input type="file" id="volcanoFileInput" accept=".csv" required>
+    <label for="volcanoWidth">Width:</label>
+    <input type="number" id="volcanoWidth" value="800" min="100" max="2000" required>
+    <label for="volcanoHeight">Height:</label>
+    <input type="number" id="volcanoHeight" value="600" min="100" max="2000" required>
+    <button onclick="generateVolcanoPlot()">Generate Volcano Plot</button>
+    <div id="volcano"></div>  <!-- Placeholder for volcano plot -->
+
+    <script>
+    // Function to generate the heatmap
+    async function generateHeatmap() {
+        let fileInput = document.getElementById("heatmapFileInput").files[0];
+        if (!fileInput) {
+            alert("Please select a file for the heatmap.");
+            return;
+        }
+
+        let width = document.getElementById("heatmapWidth").value;
+        let height = document.getElementById("heatmapHeight").value;
+
+        let formData = new FormData();
+        formData.append("file", fileInput);
+        formData.append("width", width);
+        formData.append("height", height);
+
+        try {
+            // Upload and generate heatmap in one step
+            let response = await fetch("/heatmap", { method: "POST", body: formData });
+            let result = await response.json();
+        
+            console.log("Heatmap Data:", result);  // Log the response
+        
+            if (result.error) {
+                alert(result.error);  // Show error message if any
+                return;
+            }
+        
+            // Render the heatmap using Plotly
+            Plotly.react('heatmap', result.data, result.layout);
+        } catch (error) {
+            console.error("Error generating heatmap:", error);
+            alert("An error occurred while generating the heatmap.");
+        }
+    }
+
+    // Function to generate the volcano plot
+    async function generateVolcanoPlot() {
+        let fileInput = document.getElementById("volcanoFileInput").files[0];
+        if (!fileInput) {
+            alert("Please select a file for the volcano plot.");
+            return;
+        }
+
+        let width = document.getElementById("volcanoWidth").value;
+        let height = document.getElementById("volcanoHeight").value;
+
+        let formData = new FormData();
+        formData.append("file", fileInput);
+        formData.append("width", width);
+        formData.append("height", height);
+
+        try {
+            // Upload and generate volcano plot in one step
+            let response = await fetch("/volcano", { method: "POST", body: formData });
+            let result = await response.json();
+        
+            console.log("Volcano Plot Data:", result);  // Log the response
+        
+            if (result.error) {
+                alert(result.error);  // Show error message if any
+                return;
+            }
+        
+            // Render the volcano plot using Plotly
+            Plotly.react('volcano', result.data, result.layout);
+        } catch (error) {
+            console.error("Error generating volcano plot:", error);
+            alert("An error occurred while generating the volcano plot.");
+        }
+    }
+</script>
+</body>
+</html>
