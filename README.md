@@ -3,7 +3,9 @@ Components for building an interactive webpage to visualize transcriptomic seque
 
 ## Interactive website to generate publication-ready figures
 
-- Goal: Create a website that scientists can use to upload their sequence data and generate publication ready visualizations (for non-coding familiar users)
+- Goal: Create a user-friendly website that scientists can use to visualize sequencing data
+
+*See "sequencingVisualization_stepByStep.ipynb" file for the step-by-step breakdown*
 
 ### Requirements:
 1. Set up environment
@@ -26,15 +28,10 @@ Components for building an interactive webpage to visualize transcriptomic seque
 - Local server
 
 ### Step 1: Set up the environment
-
 ### Step 2: Create the frontend (HTML)
-
 ### Step 3A: Create the backend (Flask Server)
-
 ### Step 3B: Test the backend
-
 ### Step 4: Generate figures
-
 ### Step 5: Deployment
 
 ### How to allow others to use the same environment
