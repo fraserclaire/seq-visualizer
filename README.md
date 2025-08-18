@@ -1,5 +1,7 @@
 # seq-visualizer
-Components for building an interactive webpage to visualize transcriptomic sequencing data
+Guide for the Compilation of Components for building an interactive webpage 
+
+- Use case: Visualize Transcriptomic Sequencing data
 
 ## Interactive website to generate publication-ready figures
 
